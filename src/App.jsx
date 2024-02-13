@@ -10,10 +10,10 @@ function App() {
     <main className="mx-auto bg-[#363B81] ">
       <NavBar />
       {/*Main Section */}
-      <section className="px-6 py-8 flex h-96 items-center justify-center ">
-        <div className="gap-4 flex flex-col">
-          <h1 className="text-xl">Search for your favorite Pokemon</h1>
-          <div className="flex">
+      <section className="px-6 py-8 flex items-center justify-center ">
+        <div className="gap-4 flex flex-col items-center">
+          <h1 className="text-xl font-bold">Search for your favorite Pokemon</h1>
+          <div className="">
             <PokeSearch setSelectedPokemon={setSelectedPokemon} />
           </div>
         </div>

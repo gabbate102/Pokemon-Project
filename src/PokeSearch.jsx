@@ -15,45 +15,52 @@ export default function PokeSearch({ setSelectedPokemon }) {
                     return { ...pokemonDetails, index: index + 1 };
                 });
                 setPokemonsData({ ...data, results })
+                console.log(results);
             });
     }, []);
 
-    useEffect(() => {
-
-        if (inputSearch?.length === 0) {
-            setFilteredPokemon([]);
-        }
-
-        const filter = pokemonsData.results?.filter((pokemon) => pokemon.name.includes(inputSearch));
-
-        if (filter?.length <= 10) {
-            setFilteredPokemon(filter)
-        }
-
-
-        console.log(filteredPokemon);
-    }, [pokemonsData.results, inputSearch]);
-
-
     return (
-        <div className="flex gap-8 w-full items-top justify-center">
-            <input onChange={(e) => {
-                setInputSearch(e.target.value);
-                console.log('hi');
-            }
-            } type="text" placeholder="Pikachu" className="input input-bordered input-primary w-64" />
-            <div className="grid grid-cols-2 gap-4 h-full">
-                {
-                    filteredPokemon?.map((pokemon) => {
-                        return (
-                            <div key={pokemon.name} className="">
-                                <button onClick={() => setSelectedPokemon(pokemon)} className="btn btn-success">
-                                    {pokemon.name}
-                                </button>
-                            </div>
-                        )
-                    })
-                }
+        <div className="card drop-shadow-lg bg-base-300">
+            <div className="card-body" >
+                <input
+                    type="text"
+                    placeholder="Search for pokemon..."
+                    className="input input-bordered w-full"
+                    onChange={(e) => {
+                        setInputSearch(e.target.value.toLowerCase());
+                    }}
+                />
+                <div className="overflow-x-auto rounded-md max-h-96 drop-shadow-lg">
+                    <table className="table table-zebra w-96 ">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                {/* <th></th> */}
+                                {/* <th>Type</th> */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* Map over all data and filter by search results */}
+
+                            {pokemonsData.results && pokemonsData.results.filter((pokemon) => pokemon.name.includes(inputSearch)).map((pokemon, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <th>
+                                            <div>
+                                                <a onClick={() => setSelectedPokemon(pokemon)} href="#select" className="flex items-center">
+                                                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={40} />
+                                                    <p className={`align-middle }`}>
+                                                        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )
