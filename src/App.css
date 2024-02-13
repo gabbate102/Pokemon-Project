@@ -1,5 +1,11 @@
 .pokecard {
   background-color: #FEBA36;
   width: 522px;
-  height: 622px
+  height: 622px;
+  padding: 12px;
+  border: 10px solid #FFE353;
+  border-radius: 16px;
+  /*left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);*/
 }
