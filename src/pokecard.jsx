@@ -1,19 +1,23 @@
 import { useEffect } from "react";
 import "./App.css";
 
-export default function Pokecard(props) {
+export default function Pokecard({selectedPokemon}) {
+
+  const [pokemon, setPokemon] = useState([]);
+  // get data for selected pokemon from api
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${props.name}`)
+    fetch(`${selectedPokemon.url}`)
       .then((res) => res.json())
-      
-  }, []);
+      .then((data) => setPokemon(data))
+  }, [selectedPokemon]);
   return (
   <div>
-    <div class="fixed pokecard">
+    <div class="pokecard">
       <div>
         <p class="card-title">Name</p>
       </div>
-      <div>
+      <div class="w-56 h-52">
+        img
       </div>
       <div>details section</div>
       <div>bottom section</div>
