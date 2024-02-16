@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
-import "./index.css";
+import { useEffect } from "react";
+import "./App.css";
 
-export default function Pokecard({selectedPokemon}) {
-  console.log(selectedPokemon)
-  const [pokemon, setPokemon] = useState([]);
-  console.log(selectedPokemon)
-  // get data for selected pokemon from api
+export default function Pokecard(props) {
   useEffect(() => {
-    fetch(`${selectedPokemon.url}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${props.name}`)
       .then((res) => res.json())
-      .then((data) => setPokemon(data))
-  }, [selectedPokemon]);
+      
+  }, []);
   return (
-    <div>
-      <div class="pokecard">
-        <div class="flex justify-between">
-          <p class="pokemon-title">{selectedPokemon.name}</p>
-          <p class="hp">HP: 50</p>s
-        </div>
-          <div class="w-56 h-52">
-            img
-          </div>
-        <div>
-        </div>
-        <div>details section</div>
-        <div>bottom section</div> 
+  <div>
+    <div class="fixed pokecard">
+      <div>
+        <p class="card-title">Name</p>
       </div>
+      <div>
+      </div>
+      <div>details section</div>
+      <div>bottom section</div>
     </div>
+  </div>
   )
-} 
+}
