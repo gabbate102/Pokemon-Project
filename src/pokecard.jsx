@@ -28,4 +28,4 @@ export default function Pokecard({selectedPokemon}) {
       </div>
     </div>
   )
-}
+} 
