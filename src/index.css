@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pokecard {
+  background-color: #FEBA36;
+  width: 522px;
+  height: 622px;
+  padding: 12px;
+  border: 10px solid #FFE353;
+  border-radius: 16px;
+  color: black;
+}

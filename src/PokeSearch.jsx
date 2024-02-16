@@ -1,6 +1,7 @@
 import { useState, useEffect, useTransition } from "react";
+import Pokecard from "./pokecard"
 
-export default function PokeSearch({ setSelectedPokemon }) {
+export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
 
     const [pokemonsData, setPokemonsData] = useState([]);
     const [inputSearch, setInputSearch] = useState([]);
@@ -18,6 +19,14 @@ export default function PokeSearch({ setSelectedPokemon }) {
                 console.log(results);
             });
     }, []);
+
+    function RenderCard(selectedPokemon) {
+        if (selectedPokemon != undefined) {
+            return (
+                <Pokecard selectedPokemon={selectedPokemon}/>
+            )
+        }
+    } 
 
     return (
         <div className="card drop-shadow-lg bg-base-300">
@@ -44,24 +53,32 @@ export default function PokeSearch({ setSelectedPokemon }) {
 
                             {pokemonsData.results && pokemonsData.results.filter((pokemon) => pokemon.name.includes(inputSearch)).map((pokemon, index) => {
                                 return (
-                                    <tr key={index}>
-                                        <th>
-                                            <div>
-                                                <a onClick={() => setSelectedPokemon(pokemon)} href="#select" className="flex items-center">
-                                                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={40} />
-                                                    <p className={`align-middle }`}>
-                                                        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-                                                    </p>
-                                                </a>
-                                            </div>
-                                        </th>
-                                    </tr>
+                                    <div>
+                                        <tr key={index}>
+                                            <th>
+                                                <div onClick={()=>document.getElementById('my_modal_1').showModal()}>
+                                                    <a onClick={() => setSelectedPokemon(pokemon)} href="#select" className="flex items-center">
+                                                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={40} />
+                                                        <p className={`align-middle }`}>
+                                                            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </div>
                                 )
                             })}
                         </tbody>
                     </table>
                 </div>
             </div>
+            <dialog id="my_modal_1" className="modal">
+                <RenderCard selectedPokemon = {selectedPokemon}/>
+                <form method="dialog">
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+            </dialog>
         </div>
     )
 }
