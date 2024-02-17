@@ -23,16 +23,22 @@ export default function Pokecard(props) {
   return (
   <div>
     { pokemon && pokemon.sprites &&
-    <div class="pokecard">
+    <div class="pokecard flex-col items-center justify-center">
       <div class="flex justify-between">
         <p class="card-title">{pokemon.name}</p>
-        <p class="hp">HP: </p>
+        <p class="hp">HP: {pokemon.stats[0]["base_stat"]}</p>
       </div>
-      <div class="w-56 h-52">
-        <image src={pokemon.sprites["front_shiny"]}></image>
+      <div class="w-[214] photo-section">
+        <img className="w-72" src={pokemon.sprites["front_shiny"]}></img>
       </div>
-      <div>details section</div>
-      <div>bottom section</div>
+      <div class="flex-col justify-center mt-2">
+        <p class="attack">Attack: {pokemon.stats[1]["base_stat"]}</p>
+        <p class="defense">Defense: {pokemon.stats[2]["base_stat"]}</p>
+        <p class="speed">Speed: {pokemon.stats[5]["base_stat"]}</p>
+      </div>
+      <div class="flex justify-end mt-6">
+        <button className="btn">Favorite</button>
+      </div>
     </div>
     }
   </div>
