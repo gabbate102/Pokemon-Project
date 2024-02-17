@@ -29,6 +29,22 @@ function App() {
     <main className="mx-auto bg-[#363B81] ">
       <NavBar />
       {/*Main Section */}
+
+
+
+
+      <section className="grid grid-cols-9 grid-rows-7 gap-4 p-4 absolute opacity align-middle opacity-40">
+        {Array.from({ length: 28 }).map((_, idx) => {
+          // now get a random pokemon using ther front shine sprite 
+          const randomId = Math.floor(Math.random() * 1009) + 1;
+          return (
+            <img className="animate-spin " src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomId}.png`} alt="pokemon" width={200} height={200} />
+
+          )
+
+        })}
+      </section>
+
       <section className="flex items-center">
         <div className="gap-4 flex flex-col">
           <h1 className="text-xl font-light text-center">Search for your favorite Pokemon</h1>
@@ -38,7 +54,7 @@ function App() {
         </div>
       </section>
 
-      <section className="bg-gray-800 items-start">
+      <section className="bg-gray-800 items-start h-screen">
         <div className="flex gap-4 flex-col">
           <h1 className="font-light text-xl">Your favorite pokemon</h1>
           <div className="grid grid-cols-8 gap-8">
