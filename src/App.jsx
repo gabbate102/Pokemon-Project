@@ -1,4 +1,4 @@
-import Pokecard from './Pokecard.jsx'
+import Pokecard from './pokecard.jsx'
 import NavBar from "./Layout/Navbar"
 import PokeSearch from "./PokeSearch"
 import { useState } from "react";
@@ -25,7 +25,6 @@ function App() {
       }
 
       {/* <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" /> */}
-      <Pokecard pokemon={selectedPokemon} />
     </main>
   )
 }

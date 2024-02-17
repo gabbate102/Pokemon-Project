@@ -2,7 +2,6 @@ import { useState, useEffect, useTransition } from "react";
 import Pokecard from "./pokecard"
 
 export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
-
     const [pokemonsData, setPokemonsData] = useState([]);
     const [inputSearch, setInputSearch] = useState([]);
     const [filteredPokemon, setFilteredPokemon] = useState([]);
@@ -20,14 +19,15 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
             });
     }, []);
 
+    /*
     function RenderCard(selectedPokemon) {
         if (selectedPokemon != undefined) {
             return (
                 <Pokecard selectedPokemon={selectedPokemon}/>
             )
         }
-    } 
-
+    }  
+    */
     return (
         <div className="card drop-shadow-lg bg-base-300">
             <div className="card-body" >
@@ -74,7 +74,7 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
                 </div>
             </div>
             <dialog id="my_modal_1" className="modal">
-                <RenderCard selectedPokemon = {selectedPokemon}/>
+                <Pokecard/>
                 <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
