@@ -1,6 +1,5 @@
 import React from 'react'
 import { useEffect, useState } from "react";
-import "./App.css";
 
 export default function Pokecard({selectedPokemon, setFavorites}) {
   const [pokemon, setPokemon] = useState([]);
