@@ -1,13 +1,13 @@
 import { useState, useEffect, useTransition } from "react";
 import Pokecard from "./pokecard"
 
-export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
+export default function PokeSearch({ selectedPokemon, setSelectedPokemon, setFavorites }) {
     const [pokemonsData, setPokemonsData] = useState([]);
     const [inputSearch, setInputSearch] = useState([]);
     const [filteredPokemon, setFilteredPokemon] = useState([]);
 
     useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
+        fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1000")
             .then((res) => res.json())
             .then((data) => {
                 const results = data.results.map((pokemonDetails, index) => {
@@ -42,24 +42,33 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
                         <tbody>
                             {/* Map over all data and filter by search results */}
 
-                            {pokemonsData.results && pokemonsData.results.filter((pokemon) => pokemon.name.includes(inputSearch)).map((pokemon, index) => {
+                            {pokemonsData.results ? pokemonsData.results.filter((pokemon) => pokemon.name.includes(inputSearch)).map((pokemon, index) => {
                                 return (
-                                    <div>
-                                        <tr key={index}>
-                                            <th>
-                                                <div onClick={()=>document.getElementById('my_modal_1').showModal()}>
-                                                    <a onClick={() => setSelectedPokemon(pokemon)} href="#select" className="flex items-center">
-                                                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={40} />
-                                                        <p className={`align-middle }`}>
-                                                            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-                                                        </p>
-                                                    </a>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </div>
+                                    <tr key={index}>
+                                        <th>
+                                            <div onClick={()=>document.getElementById('my_modal_1').showModal()}>
+                                                <a onClick={() => {
+                                                    setSelectedPokemon(pokemon);
+                                                    // save each selected pokemon to an array in local storage, make sure it doesnt add duplicates, also update state
+                                                    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                                                    if (!favorites.some(fav => fav.name === pokemon.name)) {
+                                                        favorites.push(pokemon);
+                                                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                                                        setFavorites(favorites);
+                                                    }
+
+                                                }}
+                                                    href="#select" className="flex items-center gap-2">
+                                                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={35} />
+                                                    <p className={`align-middle }`}>
+                                                        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </th>
+                                    </tr>
                                 )
-                            })}
+                            }) : <span className="loading loading-dots loading-md items-center justify-center flex"></span>}
                         </tbody>
                     </table>
                 </div>
