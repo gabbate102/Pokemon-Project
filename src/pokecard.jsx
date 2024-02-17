@@ -2,8 +2,9 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import "./App.css";
 
-export default function Pokecard({selectedPokemon}) {
+export default function Pokecard({selectedPokemon, setFavorites}) {
   const [pokemon, setPokemon] = useState([]);
+  const [isFavorite, setIsFavorite] = useState([]);
   // get data for selected pokemon from api
   useEffect(() => {
     if (selectedPokemon != undefined) {
@@ -16,6 +17,17 @@ export default function Pokecard({selectedPokemon}) {
     }
   }, [selectedPokemon]);
 
+  useEffect(() => {
+    if (isFavorite == true) {
+      // save each selected pokemon to an array in local storage, make sure it doesnt add duplicates, also update state
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      if (!favorites.some(fav => fav.name === pokemon.name)) {
+          favorites.push(pokemon);
+          localStorage.setItem('favorites', JSON.stringify(favorites));
+          setFavorites(favorites);
+      }
+    }
+  }, [isFavorite])
   return (
   <div>
     {selectedPokemon && pokemon && pokemon.sprites &&
@@ -33,7 +45,9 @@ export default function Pokecard({selectedPokemon}) {
         <p class="speed">Speed: {pokemon.stats[5]["base_stat"]}</p>
       </div>
       <div class="flex justify-end mt-6">
-        <button className="btn">Favorite</button>
+        <button className="btn" onClick={() => {
+          setIsFavorite(true)
+        }}>Favorite</button>
       </div>
     </div>
     }

@@ -50,13 +50,6 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon, setFav
                                                 <a onClick={() => {
                                                     setSelectedPokemon(pokemon);
                                                     // save each selected pokemon to an array in local storage, make sure it doesnt add duplicates, also update state
-                                                    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-                                                    if (!favorites.some(fav => fav.name === pokemon.name)) {
-                                                        favorites.push(pokemon);
-                                                        localStorage.setItem('favorites', JSON.stringify(favorites));
-                                                        setFavorites(favorites);
-                                                    }
-
                                                 }}
                                                     href="#select" className="flex items-center gap-2">
                                                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={35} />
@@ -74,7 +67,7 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon, setFav
                 </div>
             </div>
             <dialog id="my_modal_1" className="modal">
-                {selectedPokemon && <Pokecard selectedPokemon={selectedPokemon.index}/>}
+                {selectedPokemon && <Pokecard selectedPokemon={selectedPokemon.index} setFavorites={setFavorites}/>}
                 <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
