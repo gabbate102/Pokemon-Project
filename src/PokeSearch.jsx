@@ -1,7 +1,7 @@
 import { useState, useEffect, useTransition } from "react";
+import Pokecard from "./pokecard"
 
-export default function PokeSearch({ setSelectedPokemon, setFavorites }) {
-
+export default function PokeSearch({ selectedPokemon, setSelectedPokemon, setFavorites }) {
     const [pokemonsData, setPokemonsData] = useState([]);
     const [inputSearch, setInputSearch] = useState([]);
     const [filteredPokemon, setFilteredPokemon] = useState([]);
@@ -46,17 +46,10 @@ export default function PokeSearch({ setSelectedPokemon, setFavorites }) {
                                 return (
                                     <tr key={index}>
                                         <th>
-                                            <div>
+                                            <div onClick={()=>document.getElementById('my_modal_1').showModal()}>
                                                 <a onClick={() => {
                                                     setSelectedPokemon(pokemon);
                                                     // save each selected pokemon to an array in local storage, make sure it doesnt add duplicates, also update state
-                                                    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-                                                    if (!favorites.some(fav => fav.name === pokemon.name)) {
-                                                        favorites.push(pokemon);
-                                                        localStorage.setItem('favorites', JSON.stringify(favorites));
-                                                        setFavorites(favorites);
-                                                    }
-
                                                 }}
                                                     href="#select" className="flex items-center gap-2">
                                                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={35} />
@@ -73,6 +66,12 @@ export default function PokeSearch({ setSelectedPokemon, setFavorites }) {
                     </table>
                 </div>
             </div>
+            <dialog id="my_modal_1" className="modal">
+                {selectedPokemon && <Pokecard selectedPokemon={selectedPokemon.index} setFavorites={setFavorites}/>}
+                <form method="dialog">
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+            </dialog>
         </div>
     )
 }

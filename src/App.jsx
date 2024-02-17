@@ -1,3 +1,4 @@
+import Pokecard from './pokecard.jsx'
 import NavBar from "./Layout/Navbar"
 import PokeSearch from "./PokeSearch"
 import { useState, useEffect } from "react";
@@ -21,7 +22,7 @@ function App() {
         <div className="gap-4 flex flex-col">
           <h1 className="text-xl font-light text-center">Search for your favorite Pokemon</h1>
           <div className="">
-            <PokeSearch setSelectedPokemon={setSelectedPokemon} setFavorites={setFavorites} />
+            <PokeSearch setSelectedPokemon={setSelectedPokemon} setFavorites={setFavorites} selectedPokemon={selectedPokemon}/>
           </div>
         </div>
       </section>
