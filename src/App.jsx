@@ -22,31 +22,27 @@ function App() {
         <div className="gap-4 flex flex-col">
           <h1 className="text-xl font-light text-center">Search for your favorite Pokemon</h1>
           <div className="">
-            <PokeSearch setSelectedPokemon={setSelectedPokemon} setFavorites={setFavorites} selectedPokemon={selectedPokemon}/>
+            <PokeSearch setSelectedPokemon={setSelectedPokemon} setFavorites={setFavorites} selectedPokemon={selectedPokemon} />
           </div>
         </div>
       </section>
 
       <section className="bg-gray-800 items-start">
-        <div>
+        <div className="flex gap-4 flex-col">
           <h1 className="font-light text-xl">Your favorite pokemon</h1>
           <div className="grid grid-cols-8 gap-8">
             {favorites && favorites.map((pokemon, idx) => {
               return (
-
                 <div className="flex flex-col items-center" idx={idx}>
-                  <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.index}.png`} width={80} />
-                  <p>{pokemon.name}</p>
+                  <img src={pokemon.sprites["front_shiny"]} width={80} />
+                  <p>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</p>
                 </div>
-
               )
             })
             }
           </div>
         </div>
       </section>
-
-
     </main>
   )
 }
