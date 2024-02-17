@@ -14,6 +14,17 @@ function App() {
     setFavorites(favorites);
   }, []);
 
+  useEffect(() => {
+    console.log(selectedPokemon)
+  }, [selectedPokemon])
+
+  const removeFavorite = (pokemon) => {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let newFavorites = favorites.filter(fav => fav.name !== pokemon.name);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setFavorites(newFavorites);
+  }
+
   return (
     <main className="mx-auto bg-[#363B81] ">
       <NavBar />
@@ -33,7 +44,9 @@ function App() {
           <div className="grid grid-cols-8 gap-8">
             {favorites && favorites.map((pokemon, idx) => {
               return (
-                <div className="flex flex-col items-center" idx={idx}>
+                <div
+                  onClick={() => removeFavorite(pokemon)}
+                  className="flex flex-col items-center" idx={idx}>
                   <img src={pokemon.sprites["front_shiny"]} width={80} />
                   <p>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</p>
                 </div>
@@ -43,6 +56,9 @@ function App() {
           </div>
         </div>
       </section>
+
+
+
     </main>
   )
 }

@@ -11,6 +11,7 @@
   border-radius: 16px;
   color: black;
 }
+
 .pokecard .photo-section {
   border: 5px solid #FFE353;
   background-color: #C2EDFF;
@@ -19,10 +20,29 @@
 }
 
 section {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 250px;
-    padding: 40px 20vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 250px;
+  padding: 40px 20vw;
+}
+
+
+.x {
+  animation: x 2.6s linear infinite alternate;
+}
+
+
+
+@keyframes x {
+  100% {
+    transform: translateX(calc(100vw - 100px));
+  }
+}
+
+@keyframes y {
+  100% {
+    transform: translateY(calc(100vh - 100px));
+  }
 }
