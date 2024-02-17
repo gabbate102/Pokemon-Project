@@ -2,30 +2,27 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import "./App.css";
 
-export default function Pokecard(props) {
+export default function Pokecard({selectedPokemon}) {
+  console.log(selectedPokemon)
   const [pokemon, setPokemon] = useState([]);
   // get data for selected pokemon from api
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/1/`)
-        .then((res) => res.json())
-        .then((data) => {
-            setPokemon(data);
-            console.log(data);
-        });
+    if (selectedPokemon != undefined) {
+      fetch(`https://pokeapi.co/api/v2/pokemon/${selectedPokemon}/`)
+          .then((res) => res.json())
+          .then((data) => {
+              setPokemon(data);
+              console.log(data);
+          });
+    }
   }, []);
-  /*
-  useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-      .then((res) => res.json())
-      .then((data) => setPokemon(data))
-  }, [selectedPokemon]);
-  */
+
   return (
   <div>
-    { pokemon && pokemon.sprites &&
+    {selectedPokemon && pokemon && pokemon.sprites &&
     <div class="pokecard flex-col items-center justify-center">
       <div class="flex justify-between">
-        <p class="card-title">{pokemon.name}</p>
+        <p class="card-title">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</p>
         <p class="hp">HP: {pokemon.stats[0]["base_stat"]}</p>
       </div>
       <div class="w-[214] photo-section">

@@ -15,7 +15,7 @@ function App() {
         <div className="gap-4 flex flex-col items-center">
           <h1 className="text-xl font-bold">Search for your favorite Pokemon</h1>
           <div className="">
-            <PokeSearch setSelectedPokemon={setSelectedPokemon} />
+            <PokeSearch setSelectedPokemon={setSelectedPokemon} selectedPokemon={selectedPokemon} />
           </div>
         </div>
       </section>

@@ -19,15 +19,6 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
             });
     }, []);
 
-    /*
-    function RenderCard(selectedPokemon) {
-        if (selectedPokemon != undefined) {
-            return (
-                <Pokecard selectedPokemon={selectedPokemon}/>
-            )
-        }
-    }  
-    */
     return (
         <div className="card drop-shadow-lg bg-base-300">
             <div className="card-body" >
@@ -74,7 +65,7 @@ export default function PokeSearch({ selectedPokemon, setSelectedPokemon }) {
                 </div>
             </div>
             <dialog id="my_modal_1" className="modal">
-                <Pokecard/>
+                {selectedPokemon && <Pokecard selectedPokemon={selectedPokemon.index}/>}
                 <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
