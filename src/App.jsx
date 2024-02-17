@@ -20,10 +20,6 @@ function App() {
         </div>
       </section>
 
-      {selectedPokemon &&
-        <div>{selectedPokemon.name}</div>
-      }
-
       {/* <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" /> */}
     </main>
   )
